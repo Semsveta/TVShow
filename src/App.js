@@ -1,13 +1,11 @@
 import './App.css';
-import Layout from './components/Layout'
+import RestaurantSearch from './components/RestaurantSearch'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Layout>
-
-        </Layout>
+        <RestaurantSearch />
       </header>
     </div>
   );

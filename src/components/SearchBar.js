@@ -1,7 +1,7 @@
 import React from 'react';
 import './SearchBarStyle.css';
 
-const SearchBar = ({ input: keyword, onChange: setKeyword }) => {
+const SearchBar = ({ input, setKeyword }) => {
     const BarStyling = {
         width: "20rem",
         background: "#F2F1F9",
@@ -21,7 +21,7 @@ const SearchBar = ({ input: keyword, onChange: setKeyword }) => {
             <input
                 style={BarStyling}
                 key="random1"
-                value={keyword}
+                value={input}
                 placeholder={"type city"}
                 onChange={(e) => setKeyword(e.target.value)}
             />

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import SearchBar from './SearchBar';
-import RestaurantList from './RestaurantList';
+import SearchBar from './../components/SearchBar';
+import RestaurantList from './../components/RestaurantList';
 
-const SearchResults = (props) => {
+const RestaurantSearch = (props) => {
     const [inputState, setInputState] = useState('');
     const [ListState, setListState] = useState();
-    let setListStateDefault = [];
+    const [ListDefault, setListDefault] = useState();
+
 
     const getListOfRestaurants = async () => {
 
@@ -13,13 +14,14 @@ const SearchResults = (props) => {
             .then(response => response.json())
             .then(data => {
                 setListState(data)
-                setListStateDefault = [...setListState(data)]
+                setListDefault(data)
+
             });
     }
 
     const updateInput = async (input) => {
-        const filtered = setListStateDefault.filter(country => {
-            return country.name.toLowerCase.includes(input.toLowerCase)
+        const filtered = ListDefault.filter(country => {
+            return country.name.toLowerCase().country.name.toLowerCase().includes(input.toLowerCase())
         });
         setInputState(input);
         setListState(filtered);
@@ -29,7 +31,7 @@ const SearchResults = (props) => {
 
     return (
         <>
-            <h1>Country List</h1>
+            <h1>Restaurants</h1>
             <SearchBar
                 input={inputState}
                 setKeyword={updateInput}
@@ -41,4 +43,4 @@ const SearchResults = (props) => {
 
 }
 
-export default SearchResults;
+export default RestaurantSearch;
