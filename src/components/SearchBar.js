@@ -6,12 +6,12 @@ const SearchBar = ({ input, setInput, placeHolder }) => {
 
     return (
         <form action="/" method="get">
-            <label htmlFor="header-search">
+            <label htmlFor="search">
                 <span className="hidden">{placeHolder}</span>
             </label>
             <input className="barStyle"
                 type="text"
-                id="header-search"
+                id="search"
                 placeholder={placeHolder}
                 name="s"
                 value={input}
