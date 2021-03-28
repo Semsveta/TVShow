@@ -1,37 +1,27 @@
 import React from 'react';
-import './SearchBarStyle.css';
 
-const SearchBar = ({ input, setKeyword }) => {
-    const BarStyling = {
-        width: "20rem",
-        background: "#F2F1F9",
-        border: "none",
-        padding: "0.5rem"
-    };
-    // const ButtonStyling = {
-    //     width: "10rem",
-    //     background: "#F2F1F9",
-    //     marginLeft: "30px",
-    //     border: "none",
-    //     padding: "0.5rem"
-    // };
+
+const SearchBar = ({ input, setInput, placeHolder }) => {
+
 
     return (
-        <div className="SearchContainer" >
-            <input
-                style={BarStyling}
-                key="random1"
+        <form action="/" method="get">
+            <label htmlFor="header-search">
+                <span className="hidden">{placeHolder}</span>
+            </label>
+            <input className="barStyle"
+                type="text"
+                id="header-search"
+                placeholder={placeHolder}
+                name="s"
                 value={input}
-                placeholder={"type city"}
-                onChange={(e) => setKeyword(e.target.value)}
+                onChange={(e) => setInput(e.target.value)}
             />
-            {/* <button>
-                style={ButtonStyling}
-                onClick= {"Search Now"}
-            </button> */}
-        </div>
 
+        </form>
     );
 }
+
+
 
 export default SearchBar;

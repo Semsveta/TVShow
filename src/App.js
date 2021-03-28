@@ -1,12 +1,12 @@
 import './App.css';
-import RestaurantSearch from './components/RestaurantSearch'
+import TVShowSearch from './components/TVShowSearch';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <RestaurantSearch />
-      </header>
+      <div className="App-container">
+        <TVShowSearch />
+      </div>
     </div>
   );
 }
