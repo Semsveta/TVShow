@@ -1,24 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import SearchBar from './SearchBar';
 import ShowList from './ShowList';
+import { connect } from 'react-redux';
+import { initialListFromAPI } from './../store/actions'
 
 const MovieShowSearch = (props) => {
-    const [inputGenreState, setInputGenreState] = useState('');
-    const [inputTitleState, setInputTitleState] = useState('');
-    const [listState, setListState] = useState();
-    const [listDefault, setListDefault] = useState();
+    const [inputGenre, setInputGenre] = useState('');
+    const [inputTitle, setInputTitle] = useState('');
+    const [list, setList] = useState(...props.listDefault);
     const [listAfterFiltering, setListAfterFiltering] = useState();
     const [stateChanges, setStateChange] = useState(false);
 
-
-    const getListOfMovies = async () => {
-        return await fetch('https://api.tvmaze.com/shows')
-            .then(response => response.json())
-            .then(data => {
-                setListState(data)
-                setListDefault(data)
-            });
-    }
 
     const doesMovieMatchQuery = (show, query) => {
         const genres = show.genres;
@@ -34,17 +26,18 @@ const MovieShowSearch = (props) => {
     };
 
     const filterShowsByGenre = async (input) => {
-        const filteredByGenre = listDefault.filter(entry => {
+        const filteredByGenre = props.listDefault.filter(entry => {
             return doesMovieMatchQuery(entry, input);
         });
-        setInputGenreState(input);
-        setListState(filteredByGenre);
+        setInputGenre(input);
+        setList(filteredByGenre);
         setListAfterFiltering(filteredByGenre);
         setStateChange(true);
+        console.log("list state:" + list)
     }
 
     const filterShowsByTitle = async (input) => {
-        console.log("items before filtering by title:" + listState.count);
+        console.log("items before filtering by title:" + list.count);
         const filteredByTitle = listAfterFiltering.filter(entry => {
             if (entry.name.toLowerCase().includes(input.toLowerCase())) {
                 console.log("Found a match by title");
@@ -54,34 +47,52 @@ const MovieShowSearch = (props) => {
                 return false;
             }
         });
+        setInputTitle(input);
+        setList(filteredByTitle);
 
-        setInputTitleState(input);
-        setListState(filteredByTitle);
     }
 
-    useEffect(() => { getListOfMovies() }, []);
+
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => { props.getListofShows() }, []);
 
     return (
         <>
             <h1>Find a TV Show</h1>
             <SearchBar
-                input={inputGenreState}
+                input={inputGenre}
                 placeHolder={"Search genres, f.e. drama, fiction, science"}
                 setInput={filterShowsByGenre}
             />
 
             {stateChanges ? <SearchBar
-                input={inputTitleState}
+                input={inputTitle}
                 placeHolder={"Search title"}
                 setInput={filterShowsByTitle}
             /> : null}
 
 
-            <ShowList showList={listState} />
+            <ShowList showList={props.listDefault} />
         </>
 
     )
-
+}
+const mapStateToProps = state => {
+    return {
+        inputGenre: state.inputGenre,
+        inputTitle: state.inputTitle,
+        listDefault: state.listDefault,
+        listAfterFiltering: state.listAfterFiltering,
+        stateChanges: state.sateChanges,
+        error: state.error
+    }
 }
 
-export default MovieShowSearch;
+const mapDispatchToProps = dispatch => {
+    return {
+        getListofShows: () => dispatch(initialListFromAPI())
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieShowSearch);
