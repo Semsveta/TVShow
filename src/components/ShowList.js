@@ -13,7 +13,7 @@ const ShowList = ({ showList = [] }) => {
                         return (
                             <div className="term" key={data.id}>
                                 <dt>
-                                    <img className="img" src={data.image.medium} alt="Smile"></img>
+                                    <img className="img" src={data.image.medium} alt="N/A"></img>
                                     <p>{data.name}</p>
                                 </dt>
                                 <dd>
@@ -21,7 +21,6 @@ const ShowList = ({ showList = [] }) => {
                                     <a href={data.officialSite} style={linkStyle} >Official Site</a>
                                 </dd>
                             </div>
-
                         )
                     }
                     return null

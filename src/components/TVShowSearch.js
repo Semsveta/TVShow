@@ -4,7 +4,7 @@ import ShowList from './ShowList';
 import { connect } from 'react-redux';
 import { initialListFromAPI } from './../store/actions'
 
-const MovieShowSearch = (props) => {
+const TVShowSearch = (props) => {
     const { listDefault, getListofShows } = props
     const [inputGenre, setInputGenre] = useState('');
     const [inputTitle, setInputTitle] = useState('');
@@ -57,8 +57,6 @@ const MovieShowSearch = (props) => {
 
     }
 
-
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => { getListofShows() }, []);
 
@@ -83,13 +81,10 @@ const MovieShowSearch = (props) => {
 
     )
 }
+
 const mapStateToProps = state => {
     return {
-        inputGenre: state.inputGenre,
-        inputTitle: state.inputTitle,
         listDefault: state.listDefault,
-        listAfterFiltering: state.listAfterFiltering,
-        stateChanges: state.sateChanges,
         error: state.error
     }
 }
@@ -100,4 +95,4 @@ const mapDispatchToProps = dispatch => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MovieShowSearch);
+export default connect(mapStateToProps, mapDispatchToProps)(TVShowSearch);

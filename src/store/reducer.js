@@ -1,12 +1,8 @@
 import * as actionTypes from './actionTypes';
 
 const initialState = {
-    inputGenre: '',
-    inputTitle: '',
     list: [],
     listDefault: [],
-    listAfterFiltering: [],
-    stateChanges: false,
     error: false
 }
 
