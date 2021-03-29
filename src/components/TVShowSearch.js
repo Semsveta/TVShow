@@ -5,11 +5,16 @@ import { connect } from 'react-redux';
 import { initialListFromAPI } from './../store/actions'
 
 const MovieShowSearch = (props) => {
+    const { listDefault, getListofShows } = props
     const [inputGenre, setInputGenre] = useState('');
     const [inputTitle, setInputTitle] = useState('');
-    const [list, setList] = useState(...props.listDefault);
+    const [list, setList] = useState(listDefault);
     const [listAfterFiltering, setListAfterFiltering] = useState();
     const [stateChanges, setStateChange] = useState(false);
+
+    useEffect(() => {
+        setList(props.listDefault);
+    }, [props.listDefault]);
 
 
     const doesMovieMatchQuery = (show, query) => {
@@ -55,7 +60,7 @@ const MovieShowSearch = (props) => {
 
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(() => { props.getListofShows() }, []);
+    useEffect(() => { getListofShows() }, []);
 
     return (
         <>
@@ -73,7 +78,7 @@ const MovieShowSearch = (props) => {
             /> : null}
 
 
-            <ShowList showList={props.listDefault} />
+            <ShowList showList={list} />
         </>
 
     )
