@@ -66,13 +66,13 @@ const TVShowSearch = (props) => {
             <h1>Find a TV Show</h1>
             <SearchBar
                 input={inputGenre}
-                placeHolder={"Search genres, f.e. drama, fiction, science"}
+                placeHolder={" genres, f.e. drama, fiction, science"}
                 setInput={filterShowsByGenre}
             />
 
             {stateChanges ? <SearchBar
                 input={inputTitle}
-                placeHolder={"Search title"}
+                placeHolder={" title"}
                 setInput={filterShowsByTitle}
             /> : null}
 
