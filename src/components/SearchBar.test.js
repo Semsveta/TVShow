@@ -10,7 +10,8 @@ describe('The <SearchBar/> component', () => {
 
     it('should not fail any accessibility tests', async () => {
         const { container } = render(<SearchBar />);
-        expect(await axe(container)).toHaveNoViolations();
+        const results =  await axe (container)
+        expect(results).toHaveNoViolations();
     });
 
 });
